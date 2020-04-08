@@ -1,4 +1,4 @@
-Package: anomalystreamr420
+Package: anomalystreamr
 Type: Package
 Title: Streaming Anomaly Detection Using the Recursive Extreme Studentised Deviate Algorithm 	arXiv:1911.05376
 Version: 0.1.0
@@ -8,7 +8,7 @@ Authors@R: c(
     person("Catherine", "Mahoney", email = "@ucd.ie", role = c("aut"))
   )  
 Maintainer: Caitriona Ryan <triona.ryan@mu.ie>
-Description: The 'StreamingAnomalyDetection' package provides a statistically principled anomaly detection algorithm suitable for streaming time series data.
+Description: The 'anomalystreamr' package provides a statistically principled anomaly detection algorithm suitable for streaming time series data.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
