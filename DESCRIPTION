@@ -1,0 +1,23 @@
+Package: anomalystreamr420
+Type: Package
+Title: Streaming Anomaly Detection Using the Recursive Extreme Studentised Deviate Algorithm 	arXiv:1911.05376
+Version: 0.1.0
+Authors@R: c(
+    person("Caitriona", "Ryan", email = "triona.ryan@mu.ie", role = c("aut", "cre")),
+    person("Andrew", "Parnell", email = "andrew.parnell@mu.ie", role = c("aut")),
+    person("Catherine", "Mahoney", email = "@ucd.ie", role = c("aut"))
+  )  
+Maintainer: Caitriona Ryan <triona.ryan@mu.ie>
+Description: The 'StreamingAnomalyDetection' package provides a statistically principled anomaly detection algorithm suitable for streaming time series data.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Imports: anomalize, dplyr, glue, timetk, sweep, tibbletime (>= 0.1.3), purrr,
+        rlang, tibble, tidyr (>= 1.0.0), ggplot2, cli, crayon, stats,
+        rstudioapi,TSA,forecast, devtools, AnomalyDetection, grid, ggplotify, compiler
+RoxygenNote: 7.1.0
+Depends: R (>= 2.10)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
