@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-anomalystreamr <img src="man/figures/hexanomalystreamerblack.png" align="right" height="150" />
-===============================================================================================
+anomalystreamr <img src="man/figures/hexanomalystreamrred.png" align="right" height="150" />
+============================================================================================
 
 ------------------------------------------------------------------------
 
