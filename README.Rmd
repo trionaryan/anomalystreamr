@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 The goal of the anomalystreamr packge is to provide a statistcially prinicpled streaming algorithm to detect anomalies in time series data. Using  time series decomposition, a sliding window approach and recursive updates of the test statistics,   the generalised extreme studentised deviate (ESD) test is made computationally feasible for streaming time series data.  
 
 
- The method is statistically principled and it outperforms the \texttt{AnomalyDetection}  software package, recently released by Twitter  Inc. (Twitter)  and used by multiple teams  at Twitter as their state of the art on a daily basis. The methodology is demonstrated via the following example using unlabelled data from the Twitter \texttt{AnomalyDetection} GitHub repository and  a manufacturing example with labelled anomalies.
+ The method is statistically principled and it outperforms the AnomalyDetection  software package, recently released by Twitter  Inc. (Twitter)  and used by multiple teams  at Twitter as their state of the art on a daily basis. The methodology is demonstrated via the following example using unlabelled data from the Twitter AnomalyDetection GitHub repository and  a manufacturing example with labelled anomalies.
 
 ## Installation
 
