@@ -82,7 +82,7 @@ print(precision_recall(resd_anomalies,anomalies_known))
 ```
 
 
-Embed plots like so:
+Embed plots like so testing:
 
 ```{r pressure, echo = FALSE}
 # ggplot(data = res_dframe, aes(x = tsindextime, y =tsdata))+
