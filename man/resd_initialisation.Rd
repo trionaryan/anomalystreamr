@@ -2,22 +2,20 @@
 % Please edit documentation in R/resd_initialisation.R
 \name{resd_initialisation}
 \alias{resd_initialisation}
-\title{Model fitting functions used in to find an model based on the initialisation phase}
+\title{Functions used to find a useful model forecast based on the initialisation phase / wprime window}
 \usage{
-resd_initialisation(xdata, wprime, w, tt)
+resd_initialisation(xdata, wprime, w)
 }
 \arguments{
-\item{xdata}{Raw_data[1:1055,2]}
+\item{xdata}{Univariate time series dataset}
 
-\item{wprime}{Initialisation window size, wprime>w e.g. wprime=100.}
+\item{wprime}{Initialisation window size}
 
-\item{w}{Integer sliding window size  e.g.w=50.}
-
-\item{tt}{time to start streaming tt=wprime here or w but could be any time of interest.}
+\item{w}{Integer sliding window size, w<wprime}
 }
 \value{
 initial fitted model a list of the following
 }
 \description{
-Model fitting functions used in to find an model based on the initialisation phase
+Functions used to find a useful model forecast based on the initialisation phase / wprime window
 }

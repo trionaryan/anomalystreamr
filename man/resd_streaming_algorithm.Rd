@@ -2,9 +2,9 @@
 % Please edit documentation in R/resd_streaming_algorithm.R
 \name{resd_streaming_algorithm}
 \alias{resd_streaming_algorithm}
-\title{Methods / functions used in anomalystreamr()}
+\title{R-ESD streaming algorithm}
 \usage{
-resd_streaming_algorithm(xdata, wprime, w, tt, k, buffer, alpha, iters, deque)
+resd_streaming_algorithm(xdata, wprime, w, k, alpha, iters)
 }
 \arguments{
 \item{xdata}{Raw_data[1:1055,2]}
@@ -13,17 +13,11 @@ resd_streaming_algorithm(xdata, wprime, w, tt, k, buffer, alpha, iters, deque)
 
 \item{w}{Integer sliding window size  e.g.w=50.}
 
-\item{tt}{time to start streaming tt=wprime here or w but could be any time of interest.}
-
 \item{k}{maximum number of anomalies in a given window, e.g.  k=10 by definition of anomaly k<=0.5(length(xdata)).}
-
-\item{buffer}{buffer for mvecdeque vector.}
 
 \item{alpha}{Significance level in t distribution critical value.}
 
 \item{iters}{numeric integer number of its.}
-
-\item{deque}{boolean implement deque or not.}
 }
 \value{
 anomalies list of the following.
@@ -34,10 +28,10 @@ anomaly_results$t_A  the time stamp of the detected anomaly LATER
 
 anomaly_results$t_window the time stamp of the last observation in the relevant window
 
-iters total number of windows for streaming. How do we do this on the fly but efficiently?!?!
+iters total number of windows for streaming.
 
 stlmodel Model stl.
 }
 \description{
-Methods / functions used in anomalystreamr()
+R-ESD streaming algorithm
 }

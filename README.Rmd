@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# anomalystreamr <img src="man/figures/hexanomalystreamrred.png" align="right" height="150" />
+# anomalystreamr <img src="man/figures/hexanomalystreamerblack.png" align="right" height="150" />
 
 
 
@@ -24,10 +24,11 @@ knitr::opts_chunk$set(
  
 ---
  
-The goal of the anomalystreamr packge is to provide a statistcially prinicpled streaming algorithm to detect anomalies in time series data. Using  time series decomposition, a sliding window approach and recursive updates of the test statistics,   the generalised extreme studentised deviate (ESD) test is made computationally feasible for streaming time series data.  
+The anomalystreamr package provides code for the Recursive Extreme Dtudentised Deviate (R-ESD) algorithm; a real-time, low memory, statistically principled
+algorithm  to detect anomalies in time series data.
+It is an improved, corrected and streaming-compatible version of a very-widely used approach; the Seasonal Hybrid Extreme Studentised Deviate (SH-ESD) algorithm from the AnomalyDetection  software package, used by multiple teams  at Twitter Inc. as their state of the art on a daily basis. 
 
-
- The method is statistically principled and it outperforms the AnomalyDetection  software package, recently released by Twitter  Inc. (Twitter)  and used by multiple teams  at Twitter as their state of the art on a daily basis. The methodology is demonstrated via the following example using unlabelled data from the Twitter AnomalyDetection GitHub repository and  a manufacturing example with labelled anomalies.
+The methodology is demonstrated via the following example using unlabelled data from the Twitter AnomalyDetection GitHub repository and  a manufacturing example with labelled anomalies.
 
 ## Installation
 
@@ -39,30 +40,57 @@ The goal of the anomalystreamr packge is to provide a statistcially prinicpled s
 
 You can install the development version of anomalystreamr from [GitHub](https://github.com/) with:
 
-``` r
+## Installation
+
+You can install anomalytreamr development version 0.1.0 from github with:
+
+```{r gh-installation, eval = TRUE}
 # install.packages("devtools")
 devtools::install_github("trionaryan/anomalystreamr")
 ```
+
 ## Example
 
 This is an example
 
-```{r example}
+```{r load-packages, include=FALSE}
+library(dplyr)
+library(magrittr)
+library(knitr)
 library(anomalystreamr)
-## basic example code
+library(AnomalyDetection)
+library(TSA)
+library(forecast)
+
 ```
 
-Can include R chunks like so:
+```{r example}
+### Stremaing Twitter's Github Example
+data(raw_data)
+xdata=raw_data[,2]
+anomalies_known=14390 #No known anomalies. this is just a decoy!
+wprime=(1440*6)
+w=1440
+iters=length(xdata)-wprime-10
+k=288
+twitter_anoms<-AnomalyDetectionVec(xdata,max_anoms=0.02,period=720,longterm_period=1441,direction='both',only_last=FALSE, plot=TRUE)
 
-```{r cars}
-summary(cars)
+resd_anomalies<-resd_streaming_algorithm(xdata,wprime,w,k,alpha=0.05,iters)
+print(paste("precision,recall,f1score"))
+print(precision_recall(resd_anomalies,anomalies_known))
+
 ```
 
 
 Embed plots like so:
 
 ```{r pressure, echo = FALSE}
-plot(pressure)
+# ggplot(data = res_dframe, aes(x = tsindextime, y =tsdata))+
+#   geom_line()  +
+#   geom_point(data=res_dframe[twitter_anoms$anoms[,1], ], aes(x=tsindextime, y=tsdata), colour="blue", size=3,shape=1)+
+#   geom_point(data=res_dframe[our_detected_anomalies, ], aes(x=tsindextime, y=tsdata), colour="green", size=3,shape=4)+
+#   xlab('Timestamp') +
+#   ylab('Count')# +
 ```
 
 
