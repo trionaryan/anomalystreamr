@@ -38,9 +38,9 @@ resd_streaming_algorithm <- function(xdata,wprime,w,k,alpha,iters){
   x_forecast=initialised$x_forecast
   
   if(sum(is.na(x_forecast)>0)){
-    print("NAs in the stlmodel forecast, model can't forecast that far so need to reduce iters to:")
+    # NAs in the stlmodel forecast, model can't forecast that far so need to reduce iters to:
     iters=iters-sum(is.na(x_forecast))-1
-    print(iters)
+    # print(iters)
   }
   ####################################################################################
   ####################### STREAMING PHASE ############################################

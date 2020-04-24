@@ -21,7 +21,7 @@ model_fitting<-function(xprime,timeprime){
   ord=fs[order(-fs$spec),]
   per=1/ord[1:3,1]
   per=per[per<length(xprime)/3] # to ensure at least 3 seasons worth in the learning window
-  print(paste("period is ",per))
+  # print(paste("period is ",per))
   ts_data = msts(xprime,seasonal.periods = per)
   # AAN means additive errors, additive trend, no seasonality (because this is computed in previous step)
   stlmodel= stlm(ts_data,s.window="periodic",robust = TRUE,etsmodel="AAN")

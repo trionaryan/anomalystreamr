@@ -12,48 +12,31 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+  
+#  <img src="man/figures/hexanomalystreamerblack.png" align="right" height="150" />
 
-# anomalystreamr <img src="man/figures/hexanomalystreamerblack.png" align="right" height="150" />
+# anomalystreamr
+  
+<p>&nbsp;</p> 
 
+Real-time statistically principled anomaly detection in time series data implemented in R. 
 
-
- 
----
- 
----
- 
----
- 
-The anomalystreamr package provides code for the Recursive Extreme Dtudentised Deviate (R-ESD) algorithm; a real-time, low memory, statistically principled
-algorithm  to detect anomalies in time series data.
-It is an improved, corrected and streaming-compatible version of a very-widely used approach; the Seasonal Hybrid Extreme Studentised Deviate (SH-ESD) algorithm from the AnomalyDetection  software package, used by multiple teams  at Twitter Inc. as their state of the art on a daily basis. 
-
-The methodology is demonstrated via the following example using unlabelled data from the Twitter AnomalyDetection GitHub repository and  a manufacturing example with labelled anomalies.
+The R-ESD (Recursive Extreme Studentised Deviate) algorithm is an improved streaming-compatible version of a widely used approach; the SH-ESD (Seasonal Hybrid Extreme Studentised Deviate) algorithm from the AnomalyDetection  software package, used by multiple teams  at Twitter Inc. as their state of the art on a daily basis. 
 
 ## Installation
 
-<!-- You can install the released version of anomalystreamr from [CRAN](https://CRAN.R-project.org) with: -->
+To install the development version anomalytreamr 0.1.0 and also AnomalyDetection (for comparison) from github use:
 
-<!-- ``` r -->
-<!-- install.packages("anomalystreamr") -->
-<!-- ``` -->
-
-You can install the development version of anomalystreamr from [GitHub](https://github.com/) with:
-
-## Installation
-
-You can install anomalytreamr development version 0.1.0 from github with:
-
-```{r gh-installation, eval = TRUE}
+```{r gh-installation, eval = FALSE}
+# If required install devtools:
 # install.packages("devtools")
 devtools::install_github("trionaryan/anomalystreamr")
+library(anomalystreamr)
+devtools::install_github("twitter/AnomalyDetection")
+library(AnomalyDetection)
 ```
 
-## Example
-
-This is an example
-
-```{r load-packages, include=FALSE}
+  ```{r load-packages, include=FALSE, echo=FALSE}
 library(dplyr)
 library(magrittr)
 library(knitr)
@@ -61,36 +44,40 @@ library(anomalystreamr)
 library(AnomalyDetection)
 library(TSA)
 library(forecast)
-
+library(ggplot2)
+library(anomalystreamr)
 ```
 
+### Example 
 ```{r example}
-### Stremaing Twitter's Github Example
-data(raw_data)
-xdata=raw_data[,2]
-anomalies_known=14390 #No known anomalies. this is just a decoy!
-wprime=(1440*6)
-w=1440
-iters=length(xdata)-wprime-10
-k=288
-twitter_anoms<-AnomalyDetectionVec(xdata,max_anoms=0.02,period=720,longterm_period=1441,direction='both',only_last=FALSE, plot=TRUE)
+# Using unlabelled data from the Twitter AnomalyDetection GitHub repository.
+data(raw_data) # Load Twitter data
+xdata <- raw_data[ ,2]
+wprime <- (1440*6) # Initial learning window size
 
-resd_anomalies<-resd_streaming_algorithm(xdata,wprime,w,k,alpha=0.05,iters)
-print(paste("precision,recall,f1score"))
-print(precision_recall(resd_anomalies,anomalies_known))
+# Find anomalies using R-ESD streaming algorithm
+resd_anomalies <- resd_streaming_algorithm(xdata, wprime, w = 1440, k = 288, alpha = 0.05, iters = (length(xdata) - wprime - 10))
 
+# Find anomalies using SH-ESD non-overlapping windows (not streaming)
+twitter_anomalies <- AnomalyDetectionVec(xdata, max_anoms = 0.02, period = 720, longterm_period = 1441, direction = 'both', only_last = FALSE, plot = FALSE)
+```
+```{r,fig.align='center',fig.width=6,fig.height=5,echo=FALSE}
+# Configure data set for plot
+tsdata=xdata
+tsindex=c(1:length(xdata))
+tsindextime=raw_data[,1] #for twitter only else tsindextime=tsindex
+res_dframe=data.frame(tsindex,tsdata,tsindextime)
+# Extract R-ESD unique anomalies for visualisation purposes
+our_detected_anomalies=as.vector(na.omit(unique(as.vector(resd_anomalies$t_A))))
+# Plot R-ESD and SH-ESD 
+my_plot <- ggplot(data = res_dframe, aes(x = tsindextime, y =tsdata))+
+  geom_line()  +
+  geom_point(data=res_dframe[twitter_anomalies$anoms[,1], ], aes(x=tsindextime, y=tsdata), colour="blue", size=3,shape=1)+
+  geom_point(data=res_dframe[our_detected_anomalies, ], aes(x=tsindextime, y=tsdata), colour="green", size=3,shape=4)+
+  xlab('Timestamp') +
+  ylab('Count')
+print(my_plot,add=TRUE)
 ```
 
-
-Embed plots like so testing:
-
-```{r pressure, echo = FALSE}
-# ggplot(data = res_dframe, aes(x = tsindextime, y =tsdata))+
-#   geom_line()  +
-#   geom_point(data=res_dframe[twitter_anoms$anoms[,1], ], aes(x=tsindextime, y=tsdata), colour="blue", size=3,shape=1)+
-#   geom_point(data=res_dframe[our_detected_anomalies, ], aes(x=tsindextime, y=tsdata), colour="green", size=3,shape=4)+
-#   xlab('Timestamp') +
-#   ylab('Count')# +
-```
-
-
+### Companion article
+For further details and examples see [here](https://arxiv.org/abs/1911.05376). Beyond SH-ESD, using the EGADS benchmark A3 dataset, we demonstrate the R-ESD algorithm outperforms the EGADS and DeepAdVote algorithms both in accuracy and computational time.
