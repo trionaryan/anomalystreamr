@@ -2,8 +2,7 @@ Package: anomalystreamr
 Type: Package
 Title: Streaming Anomaly Detection Using the Recursive Extreme Studentised Deviate Algorithm 	arXiv:1911.05376
 Version: 0.1.0
-Authors@R: c(
-    person("Caitriona", "Ryan", email = "triona.ryan@mu.ie", role = c("aut", "cre")),
+Author: c(person("Caitriona", "Ryan", email = "triona.ryan@mu.ie", role = c("aut", "cre")),
     person("Andrew", "Parnell", email = "andrew.parnell@mu.ie", role = c("aut")),
     person("Catherine", "Mahoney", email = "@ucd.ie", role = c("aut"))
   )  

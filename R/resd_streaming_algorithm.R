@@ -4,7 +4,7 @@
 #' @param w Integer sliding window size  e.g.w=50.
 #' @param wprime Initialisation window size, wprime>w e.g. wprime=100.
 #' @param k maximum number of anomalies in a given window, e.g.  k=10 by definition of anomaly k<=0.5(length(xdata)).
-#' @param alpha Significance level in t distribution critical value.
+#' @param alpha_sig Significance level in t distribution critical value.
 #' @param iters numeric integer number of its.
 #'
 #' @return anomalies list of the following.
@@ -22,7 +22,7 @@
 #' @importFrom stats na.omit
 #'
 #'
-resd_streaming_algorithm <- function(xdata,wprime,w,k,alpha,iters){
+resd_streaming_algorithm <- function(xdata,wprime,w,k,alpha_sig,iters){
 
   # Set up memory storage  
   anomaly_results=list(x_A=matrix(numeric(),iters,k),t_window=matrix(numeric(),iters),t_A=matrix(numeric(),iters,k))
@@ -82,7 +82,7 @@ resd_streaming_algorithm <- function(xdata,wprime,w,k,alpha,iters){
   
     ###################### Algorithm 1 Step 11  ######################
     # Perform the ESD test for up to k anomalies in the data window
-    esd_grubbs_results=esd_grubbs_test(e0bar,epsilon,k,alpha=alpha,ss,w)
+    esd_grubbs_results=esd_grubbs_test(e0bar,epsilon,k,alpha_sig=alpha_sig,ss,w)
     # Store the results
     anomaly_results$t_window[i]=tt+i # This is an integer index but could report timepoint either.
     anomaly_results$t_A[i,]=esd_grubbs_results$t_A+wprime-w+i 

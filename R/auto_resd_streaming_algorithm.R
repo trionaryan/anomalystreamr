@@ -4,7 +4,7 @@
 #' @param w Integer sliding window size  e.g.w=50.
 #' @param wprime Initialisation window size, wprime>w e.g. wprime=100.
 #' @param k maximum number of anomalies in a given window, e.g.  k=10 by definition of anomaly k<=0.5(length(xdata)).
-#' @param alpha Significance level in t distribution critical value.
+#' @param alpha_sig Significance level in t distribution critical value.
 #' @param iters numeric integer number of iterations.
 #' @param anomalies_known known anomaly labels
 #'
@@ -19,7 +19,7 @@
 #' @importFrom stats predict
 #' @importFrom stats na.omit
 #'
-auto_resd_streaming_algorithm<-function(xdata,anomalies_known,alpha,wprime,w,iters,k){
+auto_resd_streaming_algorithm<-function(xdata,anomalies_known,alpha_sig,wprime,w,iters,k){
   if(wprime>min(anomalies_known)){
     print("Warning! There is an anomaly in the learning window!")
     print(min(anomalies_known))
@@ -31,7 +31,7 @@ auto_resd_streaming_algorithm<-function(xdata,anomalies_known,alpha,wprime,w,ite
     print("k is")
     print(k)
   }
-  anomaly_results=resd_streaming_algorithm(xdata=xdata,wprime=wprime,w=w,k=k,alpha=alpha,iters=iters)
+  anomaly_results=resd_streaming_algorithm(xdata=xdata,wprime=wprime,w=w,k=k,alpha_sig=alpha_sig,iters=iters)
   return(anomaly_results)
 
 }

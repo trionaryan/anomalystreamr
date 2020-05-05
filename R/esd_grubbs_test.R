@@ -4,7 +4,7 @@
 #' @param e0bar Mean of the vector of time series residuals.
 #' @param epsilon Time series residuals.
 #' @param k Number of outliers to test.
-#' @param alpha Significance level.
+#' @param alpha_sig Significance level.
 #' @param ss Initial sums of squares.
 #' @param w Size of window (This is denoted n in the Rosner paper)
 #'
@@ -15,7 +15,7 @@
 #'
 #' @importFrom stats qt
 #'
-esd_grubbs_test<-function(e0bar,epsilon,k,alpha,ss,w){
+esd_grubbs_test<-function(e0bar,epsilon,k,alpha_sig,ss,w){
   # Grubbs test for up to k anomalies in a vector of residuals using recursive updates to speed up computation
   epsilon=as.vector(epsilon) 
   epsilon_orig=epsilon
@@ -58,7 +58,7 @@ esd_grubbs_test<-function(e0bar,epsilon,k,alpha,ss,w){
     # Calculate a critical value γ 
     # rosners l
     l=j-1 # order statistic
-    p<-1-alpha/(2*(w-l))
+    p<-1-alpha_sig/(2*(w-l))
     t<-qt(p,(w-l-2))
 
     gamma=(w-l-1)*t/sqrt((w-l-2+t**2)*(w-l)) # ROSNER EQN 2.5
