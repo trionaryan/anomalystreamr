@@ -14,7 +14,7 @@
 #' @return anomaly_results$t_window the time stamp of the last observation in the relevant window
 #'
 #' @importFrom forecast stlm
-#' @importFrom TSA periodogram
+# #' @importFrom TSA periodogram
 #' @importFrom forecast msts
 #' @importFrom stats predict
 #' @importFrom stats na.omit

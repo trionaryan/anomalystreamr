@@ -16,7 +16,7 @@
 #' @return stlmodel Model stl.
 
 #' @importFrom forecast stlm
-#' @importFrom TSA periodogram
+# #' @importFrom TSA periodogram
 #' @importFrom forecast msts
 #' @importFrom stats predict
 #' @importFrom stats na.omit

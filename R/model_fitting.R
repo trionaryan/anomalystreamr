@@ -6,7 +6,7 @@
 #' @return streg fitted model
 #'
 #' @importFrom forecast stlm
-#' @importFrom TSA periodogram
+# #' @importFrom TSA periodogram
 #' @importFrom forecast msts
 
 #

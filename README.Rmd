@@ -56,7 +56,7 @@ xdata <- raw_data[ ,2]
 wprime <- (1440*6) # Initial learning window size
 
 # Find anomalies using R-ESD streaming algorithm
-resd_anomalies <- resd_streaming_algorithm(xdata, wprime, w = 1440, k = 288, alpha = 0.05, iters = (length(xdata) - wprime - 10))
+resd_anomalies <- resd_streaming_algorithm(xdata, wprime, w = 1440, k = 288, alpha_sig = 0.05, iters = (length(xdata) - wprime - 10))
 
 # Find anomalies using SH-ESD non-overlapping windows (not streaming)
 twitter_anomalies <- AnomalyDetectionVec(xdata, max_anoms = 0.02, period = 720, longterm_period = 1441, direction = 'both', only_last = FALSE, plot = FALSE)
