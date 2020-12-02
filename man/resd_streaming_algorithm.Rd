@@ -4,7 +4,7 @@
 \alias{resd_streaming_algorithm}
 \title{R-ESD streaming algorithm}
 \usage{
-resd_streaming_algorithm(xdata, wprime, w, k, alpha, iters)
+resd_streaming_algorithm(xdata, wprime, w, k, alpha_sig, iters)
 }
 \arguments{
 \item{xdata}{Raw_data[1:1055,2]}
@@ -15,7 +15,7 @@ resd_streaming_algorithm(xdata, wprime, w, k, alpha, iters)
 
 \item{k}{maximum number of anomalies in a given window, e.g.  k=10 by definition of anomaly k<=0.5(length(xdata)).}
 
-\item{alpha}{Significance level in t distribution critical value.}
+\item{alpha_sig}{Significance level in t distribution critical value.}
 
 \item{iters}{numeric integer number of its.}
 }

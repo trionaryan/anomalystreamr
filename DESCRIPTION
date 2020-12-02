@@ -13,8 +13,8 @@ Encoding: UTF-8
 LazyData: true
 Imports: anomalize, dplyr, glue, timetk, sweep, tibbletime (>= 0.1.3), purrr,
         rlang, tibble, tidyr (>= 1.0.0), ggplot2, cli, crayon, stats,
-        rstudioapi,TSA,forecast, devtools, AnomalyDetection, grid, ggplotify, compiler
-RoxygenNote: 7.1.0
+        rstudioapi,forecast, devtools, AnomalyDetection, grid, ggplotify, compiler
+RoxygenNote: 7.1.1
 Depends: R (>= 2.10)
 Suggests: 
     knitr,

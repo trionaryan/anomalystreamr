@@ -30,9 +30,9 @@ To install the development version anomalytreamr 0.1.0 and also AnomalyDetection
 ```{r gh-installation, eval = FALSE}
 # If required install devtools:
 # install.packages("devtools")
-devtools::install_github("trionaryan/anomalystreamr")
+# devtools::install_github("trionaryan/anomalystreamr")
 library(anomalystreamr)
-devtools::install_github("twitter/AnomalyDetection")
+# devtools::install_github("twitter/AnomalyDetection")
 library(AnomalyDetection)
 ```
 
@@ -45,7 +45,7 @@ library(AnomalyDetection)
 library(TSA)
 library(forecast)
 library(ggplot2)
-library(anomalystreamr)
+library(pixmap)
 ```
 
 ### Example 

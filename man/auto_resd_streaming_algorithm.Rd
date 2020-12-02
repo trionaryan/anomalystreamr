@@ -7,7 +7,7 @@
 auto_resd_streaming_algorithm(
   xdata,
   anomalies_known,
-  alpha,
+  alpha_sig,
   wprime,
   w,
   iters,
@@ -19,7 +19,7 @@ auto_resd_streaming_algorithm(
 
 \item{anomalies_known}{known anomaly labels}
 
-\item{alpha}{Significance level in t distribution critical value.}
+\item{alpha_sig}{Significance level in t distribution critical value.}
 
 \item{wprime}{Initialisation window size, wprime>w e.g. wprime=100.}
 

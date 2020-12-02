@@ -1,4 +1,5 @@
-# Taken from tsa which had depreciated and was taken off cran.
+#' Taken from tsa which had depreciated and was taken off cran.
+
 #' @export 
 periodogram <-
 function (y, log = "no", plot = TRUE, ylab = "Periodogram", xlab = "Frequency", 

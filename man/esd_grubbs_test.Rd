@@ -5,7 +5,7 @@
 \title{Extreme Studentised Deviate test for up to k anomalies in a vector of residuals
 Recursive updates are enabled by expressing the ESD test statistic as function of the Grubbs ratio (Grubbs 1950)}
 \usage{
-esd_grubbs_test(e0bar, epsilon, k, alpha, ss, w)
+esd_grubbs_test(e0bar, epsilon, k, alpha_sig, ss, w)
 }
 \arguments{
 \item{e0bar}{Mean of the vector of time series residuals.}
@@ -14,7 +14,7 @@ esd_grubbs_test(e0bar, epsilon, k, alpha, ss, w)
 
 \item{k}{Number of outliers to test.}
 
-\item{alpha}{Significance level.}
+\item{alpha_sig}{Significance level.}
 
 \item{ss}{Initial sums of squares.}
 
